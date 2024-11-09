@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cloud Storage App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .file-list {
+            margin-top: 20px;
+        }
+        .file-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .upload-form {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cloud Storage App</h1>
+    <div class="upload-form">
+        <h2>Subir Archivo</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <button type="submit">Subir</button>
+        </form>
+    </div>
+    <div class="file-list">
+        <h2>Archivos Almacenados</h2>
+        <% files.forEach(file => { %>
+            <div class="file-item">
+                <strong><%= file.name %></strong><br>
+                Tamaño: <%= (file.size / 1024).toFixed(2) %> KB<br>
+                Tipo: <%= file.contentType %><br>
+                <a href="/download/<%= file.name %>">Descargar</a>
+            </div>
+        <% }); %>
+    </div>
+</body>
+</html>
